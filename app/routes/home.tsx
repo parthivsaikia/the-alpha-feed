@@ -264,7 +264,7 @@ export default function Home({ actionData }: Route.ComponentProps) {
           <p className="text-muted-foreground">
             A project by{" "}
             <Link
-              to={``}
+              to={`https://x.com/_saikiaparthiv_`}
               className="text-primary underline hover:text-primary/80"
             >
               Parthiv Saikia
