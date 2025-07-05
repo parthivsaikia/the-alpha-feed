@@ -1,6 +1,18 @@
 export const homePageData = [
-  "You're a great creator, but you're running out of ideas.",
-  "You see trends take off and feel like you're always a day late.",
-  "You spend more time scrolling for inspiration than actually creating.",
-  "You want to grow faster but don't have time for complex analytics.",
+  {
+    emoji: "😫",
+    text: `You see a trend blow up and think "I had that idea 3 weeks ago"`,
+  },
+  {
+    emoji: `📱`,
+    text: `You spend 2-3 hours daily scrolling for "inspiration"`,
+  },
+  {
+    emoji: `📊`,
+    text: `You try analytics tools but they show you what's already trending`,
+  },
+  {
+    emoji: `🎯`,
+    text: `You know your audience but struggle to predict what they'll want next`,
+  },
 ];

@@ -1,9 +1,15 @@
 import { Button } from "~/components/ui/button";
+import { ShineBorder } from "components/magicui/shine-border";
 import { SparklesText } from "components/magicui/sparkles-text";
 import { CreatorsText } from "~/components/animatedText";
 import axios from "axios";
 import { homePageData } from "~/lib/data";
-import { SearchCheck, BrainCircuit, CalendarCheckIcon } from "lucide-react";
+import {
+  SearchCheck,
+  BrainCircuit,
+  CalendarCheckIcon,
+  Check,
+} from "lucide-react";
 import type { Route } from "./+types/home";
 import { Input } from "~/components/ui/input";
 import { Form, useNavigation } from "react-router";
@@ -20,6 +26,7 @@ import CheckedSentence from "~/components/checkedSentence";
 import { Link } from "react-router";
 import SuccessMessageAfterFormSubmission from "~/components/successMessage";
 import { useState } from "react";
+import { AnimatedGradientText } from "components/magicui/animated-gradient-text";
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
@@ -30,8 +37,21 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "The Alpha Feed" },
-    { name: "description", content: "Welcome to The Alpha Feed" },
+    { title: "The Alpha Feed - Stop Guessing, Start Trending" },
+    {
+      name: "description",
+      content:
+        "AI-powered trend detection for creators. Get viral content ideas 7 days before trends peak.",
+    },
+    {
+      property: "og:title",
+      content: "The Alpha Feed - Stop Guessing, Start Trending",
+    },
+    {
+      property: "og:description",
+      content:
+        "AI-powered trend detection for creators. Get viral content ideas 7 days before trends peak.",
+    },
   ];
 }
 
@@ -40,6 +60,13 @@ export default function Home({ actionData }: Route.ComponentProps) {
   const isSubmitting = navigation.state === "submitting";
   const isFormSubmitting =
     navigation.state === "submitting" && navigation.formMethod === "POST";
+
+  const earlyAccessBenefits = [
+    "50% off first year",
+    "Direct influence on features we build",
+    "Private creator community",
+    "1-on-1 onboarding",
+  ];
 
   return (
     <div className="p-8 mx-auto flex flex-col gap-8 items-center lg:w-4/5">
@@ -54,11 +81,55 @@ export default function Home({ actionData }: Route.ComponentProps) {
           Stop <span className="text-accent">Guessing</span>, Start{" "}
           <span className="text-secondary">Trending</span>
         </h1>
+
+        <h2 className="text-2xl font-semibold text-muted-foreground">
+          Get AI-powered trend insights 7 days before they explode
+        </h2>
         <CreatorsText />
         <h2 className="text-xl text-muted-foreground">
           The AI co-pilot that turns trends into hits and comments into
           insights. We find the next viral hit so you can focus on creating.
         </h2>
+        <Card className="w-5/6 mx-auto relative overflow-hidden">
+          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+          <CardContent className="flex flex-col items-center justify-center gap-4 font-bold">
+            <p>🔥 Spot viral trends before your competitors </p>
+            <p>⚡ Get ready-to-use scripts, hooks, and content ideas</p>{" "}
+            <p>⏰ Save 5+ hours of scrolling every week</p>
+          </CardContent>
+        </Card>
+
+        {/* Early Access Benefits Section - Improved */}
+        <Card className="w-5/6 mx-auto bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-2xl text-card-foreground">
+              Get Early Access
+            </CardTitle>
+            <CardDescription className="text-muted-foreground text-base">
+              Join our exclusive early access program
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {earlyAccessBenefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 p-3 bg-background/50 rounded-lg border border-border/50"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                      <Check className="w-3 h-3 text-white" />
+                    </div>
+                  </div>
+                  <span className="text-card-foreground font-medium text-sm">
+                    {benefit}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
         {actionData === undefined && (
           <div className="flex flex-col gap-4 lg:gap-8">
             <Form
@@ -77,7 +148,7 @@ export default function Home({ actionData }: Route.ComponentProps) {
                 className={`bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer `}
                 disabled={isSubmitting}
               >
-                Get Early Access and Free Trends
+                Get Early Access
                 {isSubmitting && (
                   <svg
                     aria-hidden="true"
@@ -195,13 +266,17 @@ export default function Home({ actionData }: Route.ComponentProps) {
         <Card className="flex flex-col w-full bg-card border-border">
           <CardHeader>
             <CardTitle className="text-3xl text-card-foreground">
-              Built for Creators Who are Tired of the Grind
+              You're Not Lacking Creativity - You're Lacking Intel
             </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-stretch">
             <ul className="flex flex-col gap-4 items-center justify-center">
               {homePageData.map((data) => (
-                <CheckedSentence sentence={data} key={data} />
+                <CheckedSentence
+                  emoji={data.emoji}
+                  sentence={data.text}
+                  key={data.text}
+                />
               ))}
             </ul>
           </CardContent>
@@ -232,7 +307,7 @@ export default function Home({ actionData }: Route.ComponentProps) {
               type="submit"
               disabled={isSubmitting}
             >
-              Reserve my spot
+              Reserve My Spot
               {isSubmitting && (
                 <svg
                   aria-hidden="true"
