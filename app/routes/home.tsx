@@ -229,6 +229,7 @@ export default function Home({ actionData }: Route.ComponentProps) {
             />
             <Button
               className={`bg-primary text-primary-foreground hover:bg-primary/90 `}
+              type="submit"
               disabled={isSubmitting}
             >
               Reserve my spot
