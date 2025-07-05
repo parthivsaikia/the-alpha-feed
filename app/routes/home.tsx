@@ -265,6 +265,7 @@ export default function Home({ actionData }: Route.ComponentProps) {
             A project by{" "}
             <Link
               to={`https://x.com/_saikiaparthiv_`}
+              preventScrollReset
               className="text-primary underline hover:text-primary/80"
             >
               Parthiv Saikia
